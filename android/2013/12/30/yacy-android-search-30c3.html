@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Searching the 30c3 from Android using YaCy</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Technology Updates</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Searching the 30c3 from Android using YaCy</h2>
+<p class="meta">30 Dec 2013</p>
+
+<div class="post">
+<h1>YaCy</h1>
+
+<p><a href="http://yacy.de/en/index.html">YaCy</a> is a free, decentralized P2P search engine, which allows circumventing censorship and intransparent ranking of search results. YaCy is fully configurabe, allowing indexing of manually chosen pages or using YaCy as a proxy to automatically index pages loaded through the proxy. The generated search results are stored in a <a href="http://en.wikipedia.org/wiki/Distributed_hash_table">DHT</a> and such, also exchanged between peers in the YaCy network.</p>
+
+<p><center>
+    <a href ="http://yacy.de/en/Screenshots.html" target="_blank">
+        <img src="http://yacy.de/images/screenshot_network.png" alt="YaCy network view" width="600" />
+    </a>
+</center></p>
+
+<p>At the <a href="https://events.ccc.de/congress/2013/wiki/Main_Page">30C3</a> a YaCy instance is deployed to search the event pages, schedule and the wiki from within the network. To support mobile users, an Android application, <em>30c3 Conference Search</em>, is written. </p>
+
+<h1>API</h1>
+
+<p>The It makes use of the <a href="http://www.yacy-websearch.net/wiki/index.php/Dev:APISolrSelect">Apache Solr API</a>, returning search results as well defined JSON objects. These objects are parsed within the <em>Conference Search</em> by the JSON parser provided by the Android SDK (i.e. org.json.*).</p>
+
+<h1>Android App</h1>
+
+<p>The <em>30c3 Conference Search</em> is a simple search application. After startup, the application displays a search entry field above the is designed in the <a href="http://evelynschubert.com/30C3/30C3_Colorscheme/">30C3 color scheme</a> to fit the general <em>30C3</em> appearance.</p>
+
+<p><center>
+    <a href="/assets/posts/yacy-android-search-30c3/app_blank.png">
+        <img src="/assets/posts/yacy-android-search-30c3/app_blank.png" alt="Start screen" width="300" /> 
+    </a>
+    <a href="/assets/posts/yacy-android-search-30c3/app_search.png">
+        <img src="/assets/posts/yacy-android-search-30c3/app_search.png" alt="Search result screen" width="300"/>
+    </a>
+</center></p>
+
+<p>The search results are fetched from the YaCy instance co-located at the conference venue and displayed in a list view. The retrieved search results are formatted, the page title, description and search result nuber are displayed in a list view. The search results are opened in the default browser when clicked.</p>
+
+<p>The <em>30c3 Conference Search</em> also supports pagination. Only results which are displayed are fetched from the server, reducing the used bandwidth of the mobile device.</p>
+
+<p>The source code of the <em>30c3 Conference Search</em>  is available on <a href="https://github.com/fkaup/search30c3">GitHub</a>. It should easily be changed to support any <a href="http://lucene.apache.org/solr/">Solr</a> compliant servers or fetching search results from your personal YaCy instance.</p>
+
+<!-- If you run a YaCy server and run  the search application, please provide a comment: INCLUDE COMMENTS! -->
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Fabian Kaup<br />
+				Twitter <br />
+                Updates<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/fkaup">github.com/fkaup</a><br />
+				<a href="https://twitter.com/fabiankaup">twitter.com/fabiankaup </a><br />
+                <a href="/rss.xml">RSS feed</a><br /> 
+              </p>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>

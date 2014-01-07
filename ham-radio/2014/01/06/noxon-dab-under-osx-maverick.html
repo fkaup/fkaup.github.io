@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Using the Noxon DAB/DAB+ USB dongle as SDR under OSX 10.9 (Maverick)</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Technology Updates</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Using the Noxon DAB/DAB+ USB dongle as SDR under OSX 10.9 (Maverick)</h2>
+<p class="meta">06 Jan 2014</p>
+
+<div class="post">
+<h1>Hardware</h1>
+
+<p>As SDR, the <strong>NOXON DAB/DAB+ USB</strong> dongle is used. It uses the Elonics E4000, which is known to support a wide frequency range from 52 - 2200 MHz with a gap from 1100 MHz to 1250 MHz (src: <a href="http://sdr.osmocom.org/trac/wiki/rtl-sdr">osmocom.org</a>).</p>
+
+<p>The package contains some useful components</p>
+
+<ul>
+<li>A pull-out antenna (~20 cm) with a magnetic mount and 50 cm cable</li>
+<li>A vacuum cup as a window mount</li>
+<li>A USB extension (~10 cm)</li>
+</ul>
+
+<p>The computer used for running the software is a MacBook Air from 2012.</p>
+
+<h1>Connecting the SDR:</h1>
+
+<p>First, the connection of the SDR to the local machine is verified. This is done using OSX’s built in system report. The system report can be opened as described in <a href="http://www.tekkie.ro/mobile-development/osx-list-usb-devices-lsusb-equivalent/">tekkie.ro</a>.</p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">RTL2832U
+    Product ID: 0x00e0
+    Vendor ID:  0x0ccd
+    Version:     1.00
+    Serial Number:  00000001
+    Speed:  Up to 480 Mb/sec
+    Manufacturer:   Realtek
+    Location ID:    0xfd110000 / 3
+    Current Available (mA): 500
+    Current Required (mA):  500
+</code></pre></div>
+
+<p>The SDR was recognised as a RTL2832U. Till, the device uses an Elonics E4000 chip, which is verified later.</p>
+
+<h1>Software Installation</h1>
+
+<p>The <a href="http://sdr.osmocom.org/trac/wiki/rtl-sdr">rtl-sdr</a> project provides a library to access DVB/DAB hardware to read out raw I/Q samples. It also provides some testing tools to verify the correct working of the hardware. The </p>
+
+<p><a href="http://gnuradio.org/redmine/projects/gnuradio/wiki">GnuRadio</a> is available via <a href="http://www.macports.org/install.php">MacPorts</a>. Hence, it can be installed with ease following the instructions, which were adapted from <a href="http://floatblog.de/699/gnu-radio-und-rtl-sdr-sticks">floatblog</a> (for linux, thanks!).</p>
+
+<p>To install GnuRadio, the <em>rtl-sdr</em> packages are required. while <em>GnuRadio</em>, and <em>GQRX</em> are used for testing.</p>
+
+<p>The rtl-sdr package can be installed from MacPorts running</p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">sudo port install rtl-sdr
+</code></pre></div>
+
+<p>The full GnuRadio suite is installed by running </p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">sudo port install gnuradio +full
+</code></pre></div>
+
+<p>The DVB/DAB hardware is made available in GnuRadio by installing the osmosdr library</p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">sudo port install gr-osmosdr
+</code></pre></div>
+
+<p>An alternative for testing the installation is <em>GQRX</em>, which is also available via MacPorts. GQRX is an amateur radio receiver allowing the configuration of the SDR hardware and easy demodulation of radio signals. </p>
+
+<div class="highlight"><pre><code class="text language-text" data-lang="text">sudo port install gqrx
+</code></pre></div>
+
+<h1>Hardware Test</h1>
+
+<p>The rtl-sdr package provides some tools to list the available hardware including it’s technical details by running </p>
+
+<div class="highlight"><pre><code class="bash"> rtl_test -t
+
+    Found 1 device<span class="o">(</span>s<span class="o">)</span>:
+      0:  Terratec NOXON DAB/DAB+ USB dongle <span class="o">(</span>rev 2<span class="o">)</span>
+
+    Using device 0: Terratec NOXON DAB/DAB+ USB dongle <span class="o">(</span>rev 2<span class="o">)</span>
+    Found Elonics E4000 tuner
+    Supported gain values <span class="o">(</span>14<span class="o">)</span>: -1.0 1.5 4.0 6.5 9.0 11.5 14.0 16.5 19.0 21.5 24.0 29.0 34.0 42.0 
+    Benchmarking E4000 PLL...
+    <span class="o">[</span>E4K<span class="o">]</span> PLL not locked <span class="k">for </span>52000000 Hz!
+    <span class="o">[</span>E4K<span class="o">]</span> PLL not locked <span class="k">for </span>2201000000 Hz!
+    <span class="o">[</span>E4K<span class="o">]</span> PLL not locked <span class="k">for </span>1101000000 Hz!
+    <span class="o">[</span>E4K<span class="o">]</span> PLL not locked <span class="k">for </span>1246000000 Hz!
+    E4K range: 53 to 2200 MHz
+    E4K L-band gap: 1101 to 1246 MHz
+</code></pre></div>
+
+<p>The sampling rate supported by the USB dongle must be evaluated manually. This is achieved by running <code>rtl-test -s</code>, followed by the desired sample rate. The sample rate may also be provided in exponential notation, which simplifies testing.</p>
+
+<p>The sampling rates achieved on my MacBook are the following:</p>
+
+<ul>
+<li>2 MS/s - no loss</li>
+<li>2.5 MS/s - no loss</li>
+<li>2.6 MS/s - initial samples lost, no loss later</li>
+<li>2.7 MS/s - “</li>
+<li>2.8 MS/s - “</li>
+<li>2.9 MS/s - frequent losses</li>
+<li>3 MS/s - frequent losses)</li>
+</ul>
+
+<h1>Functional Test</h1>
+
+<p>The full processing chain can easily be evaluated running <em>GQRX</em> and tuning to a local FM radio frequency. The programme should immediately be audible.</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Fabian Kaup<br />
+				Twitter <br />
+                Updates<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/fkaup">github.com/fkaup</a><br />
+				<a href="https://twitter.com/fabiankaup">twitter.com/fabiankaup </a><br />
+                <a href="/rss.xml">RSS feed</a><br /> 
+              </p>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>

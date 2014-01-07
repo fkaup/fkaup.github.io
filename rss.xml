@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+  <channel>
+    <title>Technology Updates</title>
+    <link>fkaup.github.io</link>
+    <description>Updates on recent technology</description>
+    <pubDate>Mon, 06 Jan 2014 23:23:23 -0000</pubDate>
+    <item>
+      <title>Using the Noxon DAB/DAB+ USB dongle as SDR under OSX 10.9 (Maverick)</title>
+      <link>fkaup.github.io/ham-radio/2014/01/06/noxon-dab-under-osx-maverick.html</link>
+      <description>&lt;h1&gt;Hardware&lt;/h1&gt;
+</description>
+      <pubDate>Mon, 06 Jan 2014 23:23:23 -0000</pubDate>
+      <guid>fkaup.github.io/ham-radio/2014/01/06/noxon-dab-under-osx-maverick.html</guid>
+      <dc:date>2014-01-06T23:23:23Z</dc:date>
+    </item>
+    <item>
+      <title>Searching the 30c3 from Android using YaCy</title>
+      <link>fkaup.github.io/android/2013/12/30/yacy-android-search-30c3.html</link>
+      <description>&lt;h1&gt;YaCy&lt;/h1&gt;
+</description>
+      <pubDate>Mon, 30 Dec 2013 23:30:23 -0000</pubDate>
+      <guid>fkaup.github.io/android/2013/12/30/yacy-android-search-30c3.html</guid>
+      <dc:date>2013-12-30T23:30:23Z</dc:date>
+    </item>
+    <dc:date>2014-01-06T23:23:23Z</dc:date>
+  </channel>
+</rss>
